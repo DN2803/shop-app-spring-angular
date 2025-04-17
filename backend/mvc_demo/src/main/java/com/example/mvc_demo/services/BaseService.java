@@ -1,28 +1,31 @@
 package com.example.mvc_demo.services;
 
-import com.example.mvc_demo.common.mappers.BaseMapper;
-import com.example.mvc_demo.entities.BaseDTO;
+import com.example.mvc_demo.DTOs.BaseDTO;
 import com.example.mvc_demo.entities.BaseEntity;
+import com.example.mvc_demo.mappers.BaseMapper;
 import com.example.mvc_demo.repositories.BaseRepository;
 
 import java.util.List;
 import java.util.UUID;
 
-public class BaseService<E extends BaseEntity, D extends BaseDTO> {
-    protected final BaseRepository<E> repository;
-    protected E entity;
-    protected D entityDTO;
-    protected final BaseMapper<E, D> mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    public BaseService(BaseRepository<E> repository,
-                       Class<E> entityClass,
-                       Class<D> dtoClass,
-                       BaseMapper<E, D> mapper) {
-        this.repository = repository;
-        this.entity = null;
-        this.entityDTO = null;
-        this.mapper = mapper;
-    }
+public class BaseService<E extends BaseEntity, D extends BaseDTO, R extends BaseRepository<E>, M extends BaseMapper<E, D>> {
+    // @Autowired
+    protected  R repository;
+    // @Autowired
+    protected E entity;
+    // @Autowired
+    protected D entityDTO;
+    // @Autowired
+    protected M mapper;
+
+    // public BaseService(BaseRepository<E> repository,
+    //                    Class<E> entityClass,
+    //                    Class<D> dtoClass,
+    //                    BaseMapper<E, D> mapper) {
+        
+    // }
     public List<D> getAll() {
         List<E> entities = (List<E>) repository.findAll();
         return mapper.toDTOs(entities);

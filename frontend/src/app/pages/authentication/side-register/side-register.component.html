@@ -30,24 +30,30 @@
 
           <div class="or-border m-t-30">or sign up with</div>
 
-          <form class="m-t-30">
+          <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
             <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Name</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput />
+              <input matInput type="fullname" formControlName="fullname" />
+            </mat-form-field>
+            <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="username" formControlName="username" />
             </mat-form-field>
             <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Email Adddress</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="email" />
+              <input matInput type="email" formControlName="email" />
+              <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="form.get('email')?.hasError('email')">Enter a valid email address</mat-error>
             </mat-form-field>
             <!-- password -->
             <mat-label class="f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" />
+              <input matInput type="password" formControlName="password" />
             </mat-form-field>
 
-            <a [routerLink]="['/']" mat-flat-button color="primary" class="w-100">
+            <button mat-flat-button color="primary" class="w-100" type = "submit">
               Sign Up
-            </a>
+            </button>
             <!-- input -->
           </form>
           <span class="d-block f-w-500 text-center m-t-24">Already have an Account?

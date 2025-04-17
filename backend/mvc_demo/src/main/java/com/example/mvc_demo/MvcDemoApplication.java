@@ -6,11 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.example.mvc_demo.config.JwtConfig;
 import com.example.mvc_demo.repositories.BaseRepositoryImpl;
 
 @SpringBootApplication
-@EnableConfigurationProperties(JwtConfig.class)
+@EnableConfigurationProperties()
 @EnableJpaRepositories(
 	basePackages = "com.example.mvc_demo",
     repositoryBaseClass = BaseRepositoryImpl.class
